@@ -1,0 +1,1 @@
+graficar poligono ( 12 + 2, 15, 12, 50 / 2, 6, amarillo)

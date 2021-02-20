@@ -1,0 +1,145 @@
+package analizadores;
+
+import java_cup.runtime.*;
+import java.util.ArrayList;
+import java.util.List;
+import objetos.animar;
+import objetos.graficar;
+import objetos.operacion;
+import objetos.ErrorCom;
+
+parser code {:
+
+    private List<String> errorsList;
+    private List<ErrorCom> erroresCom;
+    private List<graficar> graficos;
+    private List<animar> animaciones;
+    private List<operacion> operaciones;
+    private graficar graficoAnt;
+
+	public Parser(Lexer lex) {
+		super(lex);
+		this.graficos = new ArrayList();
+		this.animaciones = new ArrayList();
+        this.operaciones = new ArrayList();
+        this.errorsList = new ArrayList();
+        this.errorsList = lex.getErrorsList();
+        this.erroresCom = lex.getErroresCom();
+        graficoAnt = null;
+	}
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintactico.
+     **/ 
+    public void syntax_error(Symbol s){ 
+        //System.out.println("Error Sintáctico en la Línea " + (s.left) +
+        //" Columna "+s.right+ ". No se esperaba este componente: " +s.value+"."); 
+        erroresCom.add(new ErrorCom("Sintactico","No se esperaba Componente",String.valueOf(s.left),String.valueOf(s.right),String.valueOf(s.value)));
+    } 
+
+    /**
+     * Método al que se llama automáticamente ante algún error sintáctico 
+     * en el que ya no es posible una recuperación de errores.
+     **/ 
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        //System.out.println("Error síntactico irrecuperable en la Línea " + 
+        //(s.left)+ " Columna "+s.right+". Componente " + s.value + 
+        //" no reconocido."); 
+        erroresCom.add(new ErrorCom("Sintactico","Error sintactico Irrecuperable",String.valueOf(s.left),String.valueOf(s.right),String.valueOf(s.value)));
+    } 
+
+    protected int error_sync_size() {
+		return 3;
+	}
+
+    public List<graficar> getGraficos(){
+        return graficos;	    
+    }
+
+    public List<animar> getAnimaciones(){
+        return animaciones;	    
+    }
+
+    public List<operacion> getOperaciones(){
+        return operaciones;	    
+    }
+	    
+    public List<String> getErrorsList(){
+	    return errorsList;
+	}
+
+    public List<ErrorCom> getErroresCom(){
+	    return erroresCom;
+	}
+
+:}
+
+/* Terminals (tokens returned by the scanner). */
+terminal 	SMAS,SMENOS,SMULT,SDIVI;
+terminal 	PARI,PARD;
+terminal 	GRAFICAR,COMA;
+terminal 	ANIM,OBJ,ANT;
+terminal    CIRC,CUAD,RECT,POLIG;
+
+terminal   String COLOR,CURVA,LINEA;
+terminal   String NUMERO;
+
+/* Non-Terminals (created scanner). */
+non terminal  inicio, siguiente, graf,tanimacion;
+non terminal Double expr;
+
+precedence left SMAS,SMENOS;
+precedence left SMULT,SDIVI;
+
+/* The grammar : */
+
+start with inicio;
+
+inicio ::= 
+            GRAFICAR    graf:g  siguiente:s
+        |   GRAFICAR    graf:g        
+;
+
+siguiente ::=            
+            ANIM OBJ ANT PARI expr:desx COMA expr:desy COMA tanimacion:tipo PARD {:
+            animaciones.add(new animar(desx, desy,String.valueOf(tipo),graficos.get(graficos.size()-1)));
+        :} inicio:i 
+        |   ANIM OBJ ANT PARI expr:desx COMA expr:desy COMA tanimacion:tipo PARD {:
+            animaciones.add(new animar(desx, desy,String.valueOf(tipo),graficos.get(graficos.size()-1))); 
+        :}        
+        |   inicio 
+        |   error:e siguiente
+;
+
+tanimacion ::= 
+                LINEA:tipo {:RESULT = tipo;:}
+            |   CURVA:tipo {:RESULT = tipo;:}
+;
+
+graf ::=
+            CIRC PARI expr:posx COMA expr:posy COMA expr:radio COMA COLOR:c PARD{: graficar graficoT = new graficar("circulo", posx,posy,c,radio);
+            graficos.add(graficoT); graficoAnt = graficoT;
+        :}
+        |   CUAD PARI expr:posx COMA expr:posy COMA expr:lado COMA COLOR:c PARD{: graficar graficoT = new graficar("cuadrado", posx,posy,c,lado);
+            graficos.add(graficoT); graficoAnt = graficoT;
+        :}
+        |   RECT PARI expr:posx COMA expr:posy COMA expr:lado COMA expr:ancho COMA COLOR:c PARD{: graficar graficoT = new graficar("rectangulo", posx,posy,c,lado,ancho);
+            graficos.add(graficoT); graficoAnt = graficoT;
+        :}
+        |   LINEA PARI expr:posx COMA expr:posy COMA expr:posx2 COMA expr:posy2 COMA COLOR:c PARD{: graficar graficoT = new graficar("linea", posx,posy,c,posx2,posy2);
+            graficos.add(graficoT); graficoAnt = graficoT;
+        :}
+        |   POLIG PARI expr:posx COMA expr:posy COMA expr:alto COMA expr:ancho COMA expr:cant COMA COLOR:c PARD{: graficar graficoT = new graficar("poligono", posx,posy,c,alto,ancho,cant);
+            graficos.add(graficoT); graficoAnt = graficoT;
+        :}
+        |   error:e graf {:errorsList.add("Error graficando");:}
+;
+
+expr ::=
+            expr:x SMAS:s expr:y      {:RESULT=x+y; operaciones.add(new operacion("suma",String.valueOf(x) + "+" + String.valueOf(y)));:}
+        |   expr:x SMENOS:s expr:y    {:RESULT=x-y; operaciones.add(new operacion("resta",String.valueOf(x) + "-" + String.valueOf(y)));:}
+        |   expr:x SMULT:s expr:y     {:RESULT=x*y; operaciones.add(new operacion("multiplicacion",String.valueOf(x) + "*" + String.valueOf(y)));:}
+        |   expr:x SDIVI:s expr:y     {:RESULT=x/y; operaciones.add(new operacion("division",String.valueOf(x) + "/" + String.valueOf(y)));:}
+        |   NUMERO:x                  {:RESULT=new Double(x);:}        
+        |   PARI expr:x PARD          {:RESULT=x;:}
+;
