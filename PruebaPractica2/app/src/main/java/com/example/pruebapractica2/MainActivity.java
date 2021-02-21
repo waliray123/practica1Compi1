@@ -11,6 +11,9 @@ import android.widget.EditText;
 import com.example.pruebapractica2.analizadores.Lexer;
 import com.example.pruebapractica2.analizadores.Parser;
 import com.example.pruebapractica2.objetos.ErrorCom;
+import com.example.pruebapractica2.objetos.animar;
+import com.example.pruebapractica2.objetos.graficar;
+import com.example.pruebapractica2.objetos.operacion;
 
 import java.io.Serializable;
 import java.io.StringReader;
@@ -60,13 +63,20 @@ public class MainActivity extends AppCompatActivity {
                     List<ErrorCom> errores = new ArrayList<>();
                     errores = parser.getErroresCom();
 
+                    //Listas de objetos
+                    List<graficar> graficos = new ArrayList<>();
+                    graficos = parser.getGraficos();
+                    List<animar> animaciones = new ArrayList<>();
+                    animaciones = parser.getAnimaciones();
+                    List<operacion> operaciones = new ArrayList<>();
+                    operaciones = parser.getOperaciones();
 
                     //desplegarResultado(parser.getClavesList());
 
                     if (errores.size() != 0){
                         desplegarErrores(errores);
                     }else{
-                        desplegarResultado();
+                        desplegarResultado(graficos,animaciones,operaciones);
                     }
 
 
@@ -93,8 +103,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void desplegarResultado(){
+    public void desplegarResultado(List<graficar> graficos, List<animar> animaciones, List<operacion> operaciones){
         Intent intent = new Intent (this, ResultadosCom.class);
+        intent.putExtra("LISTAG",(Serializable) graficos);
+        intent.putExtra("LISTAA",(Serializable) animaciones);
+        intent.putExtra("LISTAO",(Serializable) operaciones);
+
         startActivityForResult(intent, 0);
     }
 

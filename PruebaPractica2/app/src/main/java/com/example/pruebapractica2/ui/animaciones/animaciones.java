@@ -17,11 +17,7 @@ import com.example.pruebapractica2.objetos.coloresU;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link animaciones#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class animaciones extends Fragment {
 
     private ListView listView;
@@ -33,17 +29,18 @@ public class animaciones extends Fragment {
         String myDataFromActivity = activity.getStringHello();
 
 
-        View root = inflater.inflate(R.layout.fragment_colores, container, false);
+        View root = inflater.inflate(R.layout.fragment_animaciones, container, false);
 
-        List<coloresU> colores;
-        colores = new ArrayList<>();
-        coloresU op1 = new coloresU("Linea","7");
-        coloresU op2 = new coloresU("Curva","2");
+        List<coloresU> animaciones;
+        animaciones = new ArrayList<>();
+        animaciones = activity.getAnimacionesUSAR();
+        //coloresU op1 = new coloresU("Linea","7");
+        //coloresU op2 = new coloresU("Curva","2");
 
-        colores.add(op1);
-        colores.add(op2);
+        //colores.add(op1);
+        //colores.add(op2);
 
-        adaptadorColores adapter =  new adaptadorColores(activity,R.layout.layout_doscolm,colores);
+        adaptadorColores adapter =  new adaptadorColores(activity,R.layout.layout_doscolm,animaciones);
         listView = (ListView) root.findViewById(R.id.listView);;
         listView.setAdapter(adapter);
 

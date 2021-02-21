@@ -5,11 +5,13 @@
  */
 package com.example.pruebapractica2.objetos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user-ubunto
  */
-public class animar {
+public class animar implements Serializable {
     private Double destinox;
     private Double destinoy;
     private String tipo;

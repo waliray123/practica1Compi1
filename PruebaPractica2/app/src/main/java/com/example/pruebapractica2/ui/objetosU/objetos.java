@@ -33,11 +33,13 @@ public class objetos extends Fragment {
 
         List<coloresU> graficos;
         graficos = new ArrayList<>();
-        coloresU op1 = new coloresU("Circulo","5");
+        graficos = activity.getGraficosUSAR();
+
+        /*coloresU op1 = new coloresU("Circulo","5");
         coloresU op2 = new coloresU("Linea","1");
 
         graficos.add(op1);
-        graficos.add(op2);
+        graficos.add(op2);*/
 
         adaptadorColores adapter =  new adaptadorColores(activity,R.layout.layout_doscolm,graficos);
         listView = (ListView) root.findViewById(R.id.listView);

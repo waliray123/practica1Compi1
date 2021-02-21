@@ -5,11 +5,13 @@
  */
 package com.example.pruebapractica2.objetos;
 
+import java.io.Serializable;
+
 /**
  *
  * @author user-ubunto
  */
-public class graficar {    
+public class graficar implements Serializable {
     private String tipo;
     private Double posx;
     private Double posy;

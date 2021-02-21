@@ -38,11 +38,12 @@ public class GalleryFragment extends Fragment {
 
         List<operacion> operaciones;
         operaciones = new ArrayList<>();
-        operacion op1 = new operacion("MULT","2*5","1","20");
+        operaciones = activity.getOperaciones();
+        /*operacion op1 = new operacion("MULT","2*5","1","20");
         operacion op2 = new operacion("MULT","54*7","2","22");
 
         operaciones.add(op1);
-        operaciones.add(op2);
+        operaciones.add(op2);*/
 
         adaptadorOcurrencias adapter =  new adaptadorOcurrencias(activity,R.layout.layout_operaciones,operaciones);
         listView = (ListView) root.findViewById(R.id.listView);;

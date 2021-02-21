@@ -34,11 +34,12 @@ public class colores extends Fragment {
 
         List<coloresU> colores;
         colores = new ArrayList<>();
-        coloresU op1 = new coloresU("Rojo","10");
+        colores = activity.getColoresUSAR();
+        /*coloresU op1 = new coloresU("Rojo","10");
         coloresU op2 = new coloresU("Verde","20");
 
         colores.add(op1);
-        colores.add(op2);
+        colores.add(op2);*/
 
         adaptadorColores adapter =  new adaptadorColores(activity,R.layout.layout_doscolm,colores);
         listView = (ListView) root.findViewById(R.id.listView);;
