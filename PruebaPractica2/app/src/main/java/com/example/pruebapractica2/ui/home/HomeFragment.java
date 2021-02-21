@@ -1,35 +1,63 @@
 package com.example.pruebapractica2.ui.home;
 
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pruebapractica2.R;
+import com.example.pruebapractica2.ResultadosCom;
+import com.example.pruebapractica2.adaptadores.adaptadorOcurrencias;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    public HomeFragment() {
+       // ResultadosCom activity = (ResultadosCom) getActivity();
+        //activity.setContentView(R.layout.fragment_home);
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        ResultadosCom activity = (ResultadosCom) getActivity();
+
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        Lienzo adapter =  new Lienzo(activity,activity.getGraficos(),activity.getAnimaciones());
+        ConstraintLayout layout1 = (ConstraintLayout) root.findViewById(R.id.capadisenio);
+        layout1.addView(adapter);
+
+        Button boton = root.findViewById(R.id.buttonPlay);
+        boton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View view) {
+                Snackbar.make(view, "Se realizo una accion en el boton", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                LienzoAnim adapter2 =  new LienzoAnim(activity);
+                layout1.addView(adapter2);
             }
         });
+
         return root;
     }
+
+
+
+
+
 }
