@@ -5,11 +5,15 @@
 
 package com.example.pruebapractica2.analizadores;
 
+import com.example.pruebapractica2.objetos.ErrorCom;
+import com.example.pruebapractica2.objetos.animar;
+import com.example.pruebapractica2.objetos.graficar;
+import com.example.pruebapractica2.objetos.operacion;
+
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
-import com.example.pruebapractica2.objetos.*;
-import java_cup.runtime.XMLElement;
+
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */

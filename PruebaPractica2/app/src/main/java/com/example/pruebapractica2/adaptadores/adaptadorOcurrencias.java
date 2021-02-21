@@ -7,8 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-
 import com.example.pruebapractica2.R;
 import com.example.pruebapractica2.objetos.ErrorCom;
 import com.example.pruebapractica2.objetos.operacion;

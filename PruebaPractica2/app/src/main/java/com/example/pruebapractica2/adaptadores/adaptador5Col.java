@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.example.pruebapractica2.R;
 import com.example.pruebapractica2.objetos.ErrorCom;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class adaptador5Col extends ArrayAdapter<ErrorCom>{

@@ -11,7 +11,6 @@ import android.widget.EditText;
 import com.example.pruebapractica2.analizadores.Lexer;
 import com.example.pruebapractica2.analizadores.Parser;
 import com.example.pruebapractica2.objetos.ErrorCom;
-import com.example.pruebapractica2.ui.Resultado;
 
 import java.io.Serializable;
 import java.io.StringReader;

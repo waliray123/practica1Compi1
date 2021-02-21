@@ -22,4 +22,23 @@
         android:name="com.example.pruebapractica2.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_colores"
+        android:name="com.example.pruebapractica2.ui.colores.colores"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_colores" />
+
+    <fragment
+        android:id="@+id/nav_objetos"
+        android:name="com.example.pruebapractica2.ui.objetosU.objetos"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_objetos" />
+
+    <fragment
+        android:id="@+id/nav_animaciones"
+        android:name="com.example.pruebapractica2.ui.animaciones.animaciones"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_animaciones" />
+
 </navigation>

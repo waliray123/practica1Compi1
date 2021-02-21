@@ -5,17 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.pruebapractica2.R;
 import com.example.pruebapractica2.ResultadosCom;
-import com.example.pruebapractica2.adaptadores.adaptador5Col;
 import com.example.pruebapractica2.adaptadores.adaptadorOcurrencias;
 import com.example.pruebapractica2.objetos.ErrorCom;
 import com.example.pruebapractica2.objetos.operacion;

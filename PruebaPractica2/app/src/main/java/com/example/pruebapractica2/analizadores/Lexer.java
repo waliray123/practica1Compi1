@@ -5,8 +5,8 @@
 //Codigo Usuario
 package com.example.pruebapractica2.analizadores;
 
-import java_cup.runtime.*; 
-import com.example.pruebapractica2.analizadores.sym.*;
+import java_cup.runtime.*;
+
 import java.util.List;
 import java.util.ArrayList;
 import com.example.pruebapractica2.objetos.ErrorCom;
