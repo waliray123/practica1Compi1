@@ -1,17 +1,24 @@
 package com.example.pruebapractica2.ui.home;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.view.View;
 
+import com.example.pruebapractica2.R;
 import com.example.pruebapractica2.objetos.animar;
 import com.example.pruebapractica2.objetos.graficar;
 
+import java.util.BitSet;
 import java.util.List;
 
 
@@ -71,9 +78,34 @@ public class Lienzo extends View {
                         getPincel(grafico.getColor()));
             }
             else if(tipo.equalsIgnoreCase("poligono")){
-                
+                Paint pincel = getPincel(grafico.getColor());
+                ColorFilter filter = getColorPaint(grafico.getColor());
+                pincel.setColorFilter(filter);
+                Bitmap bitmap = getPathPol(grafico.getIns5().intValue());
+                Bitmap polR = Bitmap.createScaledBitmap(bitmap,grafico.getIns4().intValue(),grafico.getIns3().intValue(),true);
+
+                canvas.drawBitmap(polR,grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),pincel);
             }
         }
+    }
+
+    private Bitmap getPathPol(int cantLados){
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol6);
+        if (cantLados == 5){
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol5);
+        }else if(cantLados == 6){
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol6);
+        }else if(cantLados == 7){
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol7);
+        }else if(cantLados == 8){
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol8);
+        }else if(cantLados == 9){
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol9);
+        }else if(cantLados == 10){
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol10);
+        }
+
+        return bitmap;
     }
 
 
@@ -100,7 +132,27 @@ public class Lienzo extends View {
         return pincel;
     }
 
-
+    private ColorFilter getColorPaint(String colorUsado){
+        ColorFilter filter = new ColorFilter();
+        if (colorUsado.equalsIgnoreCase("azul")){
+            filter = new PorterDuffColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("rojo")){
+            filter = new PorterDuffColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("verde")){
+            filter = new PorterDuffColorFilter(Color.GREEN, PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("amarillo")){
+            filter = new PorterDuffColorFilter(Color.YELLOW, PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("naranja")){
+            filter = new PorterDuffColorFilter(Color.rgb(232,93,4), PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("morado")){
+            filter = new PorterDuffColorFilter(Color.rgb(87,35,100), PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("cafe")){
+            filter = new PorterDuffColorFilter(Color.rgb(128,64,0), PorterDuff.Mode.SRC_IN);
+        }else if(colorUsado.equalsIgnoreCase("negro")){
+            filter = new PorterDuffColorFilter(Color.rgb(0,0,0), PorterDuff.Mode.SRC_IN);
+        }
+        return filter;
+    }
 
     public Canvas getCanvas() {
         return canvas;

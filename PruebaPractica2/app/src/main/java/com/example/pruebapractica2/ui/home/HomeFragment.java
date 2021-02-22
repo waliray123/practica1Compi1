@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Se realizo una accion en el boton", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                LienzoAnim adapter2 =  new LienzoAnim(activity);
+                LienzoAnim adapter2 =  new LienzoAnim(activity,activity.getGraficos(),activity.getAnimaciones());
                 layout1.addView(adapter2);
             }
         });

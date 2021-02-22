@@ -45,6 +45,7 @@ public class pintarObjetos extends SurfaceView implements Runnable {
         coorAnim[0][0] += 1;
         coorAnim[0][1] += 1;
         this.canvas.drawCircle(coorAnim[0][0],coorAnim[0][1],50,pincel1);
+
     }
 
 
