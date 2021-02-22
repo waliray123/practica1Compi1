@@ -5,20 +5,19 @@
 
 package com.example.pruebapractica2.analizadores;
 
-import com.example.pruebapractica2.objetos.ErrorCom;
-import com.example.pruebapractica2.objetos.animar;
-import com.example.pruebapractica2.objetos.graficar;
-import com.example.pruebapractica2.objetos.operacion;
-
 import java_cup.runtime.*;
 import java.util.ArrayList;
 import java.util.List;
-
+import com.example.pruebapractica2.objetos.animar;
+import com.example.pruebapractica2.objetos.graficar;
+import com.example.pruebapractica2.objetos.operacion;
+import com.example.pruebapractica2.objetos.ErrorCom;
+import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
 @SuppressWarnings({"rawtypes"})
-public class Parser extends java_cup.runtime.lr_parser {
+public class Parser extends lr_parser {
 
  public final Class getSymbolContainer() {
     return sym.class;
@@ -30,10 +29,10 @@ public class Parser extends java_cup.runtime.lr_parser {
 
   /** Constructor which sets the default scanner. */
   @Deprecated
-  public Parser(java_cup.runtime.Scanner s) {super(s);}
+  public Parser(Scanner s) {super(s);}
 
   /** Constructor which sets the default scanner. */
-  public Parser(java_cup.runtime.Scanner s, java_cup.runtime.SymbolFactory sf) {super(s,sf);}
+  public Parser(Scanner s, SymbolFactory sf) {super(s,sf);}
 
   /** Production table. */
   protected static final short _production_table[][] = 
@@ -180,9 +179,9 @@ public class Parser extends java_cup.runtime.lr_parser {
     }
 
   /** Invoke a user supplied parse action. */
-  public java_cup.runtime.Symbol do_action(
+  public Symbol do_action(
     int                        act_num,
-    java_cup.runtime.lr_parser parser,
+    lr_parser parser,
     java.util.Stack            stack,
     int                        top)
     throws Exception
@@ -211,6 +210,7 @@ public class Parser extends java_cup.runtime.lr_parser {
     private List<animar> animaciones;
     private List<operacion> operaciones;
     private graficar graficoAnt;
+    private int codigoGraf;
 
 	public Parser(Lexer lex) {
 		super(lex);
@@ -221,6 +221,7 @@ public class Parser extends java_cup.runtime.lr_parser {
         this.errorsList = lex.getErrorsList();
         this.erroresCom = lex.getErroresCom();
         graficoAnt = null;
+        codigoGraf = 0;
 	}
 
     /**
@@ -280,15 +281,15 @@ class CUP$Parser$actions {
   }
 
   /** Method 0 with the actual generated action code for actions 0 to 300. */
-  public final java_cup.runtime.Symbol CUP$Parser$do_action_part00000000(
+  public final Symbol CUP$Parser$do_action_part00000000(
     int                        CUP$Parser$act_num,
-    java_cup.runtime.lr_parser CUP$Parser$parser,
+    lr_parser CUP$Parser$parser,
     java.util.Stack            CUP$Parser$stack,
     int                        CUP$Parser$top)
     throws Exception
     {
       /* Symbol object for return from actions */
-      java_cup.runtime.Symbol CUP$Parser$result;
+      Symbol CUP$Parser$result;
 
       /* select the action based on the action number */
       switch (CUP$Parser$act_num)
@@ -297,11 +298,11 @@ class CUP$Parser$actions {
           case 0: // $START ::= inicio EOF 
             {
               Object RESULT =null;
-		int start_valleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int start_valright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object start_val = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int start_valleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int start_valright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object start_val = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		RESULT = start_val;
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("$START",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("$START",0, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           /* ACCEPT */
           CUP$Parser$parser.done_parsing();
@@ -311,14 +312,14 @@ class CUP$Parser$actions {
           case 1: // inicio ::= GRAFICAR graf siguiente 
             {
               Object RESULT =null;
-		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int gleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int gright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object g = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int sleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int sright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Object s = (Object)((Symbol) CUP$Parser$stack.peek()).value;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -326,11 +327,11 @@ class CUP$Parser$actions {
           case 2: // inicio ::= GRAFICAR graf 
             {
               Object RESULT =null;
-		int gleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int gright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Object g = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int gleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int gright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Object g = (Object)((Symbol) CUP$Parser$stack.peek()).value;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -338,19 +339,19 @@ class CUP$Parser$actions {
           case 3: // NT$0 ::= 
             {
               Object RESULT =null;
-		int desxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int desxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double desx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int desyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int desyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double desy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int tipoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int tiporight = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object tipo = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int desxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int desxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double desx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int desyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int desyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double desy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int tipoleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int tiporight = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object tipo = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 
-            animaciones.add(new animar(desx, desy,String.valueOf(tipo),graficos.get(graficos.size()-1)));
+            animaciones.add(new animar(desx, desy,String.valueOf(tipo),graficos.get(graficos.size()-1),codigoGraf-1));
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$0",5, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("NT$0",5, ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -359,21 +360,21 @@ class CUP$Parser$actions {
             {
               Object RESULT =null;
               // propagate RESULT from NT$0
-                RESULT = (Object) ((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int desxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
-		int desxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
-		Double desx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		int desyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int desyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double desy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int tipoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int tiporight = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Object tipo = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int ileft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int iright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Object i = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+                RESULT = (Object) ((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int desxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
+		int desxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
+		Double desx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
+		int desyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int desyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double desy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int tipoleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int tiporight = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Object tipo = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int ileft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int iright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Object i = (Object)((Symbol) CUP$Parser$stack.peek()).value;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -381,19 +382,20 @@ class CUP$Parser$actions {
           case 5: // siguiente ::= ANIM OBJ ANT PARI expr COMA expr COMA tanimacion PARD 
             {
               Object RESULT =null;
-		int desxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int desxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double desx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int desyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int desyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double desy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int tipoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int tiporight = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object tipo = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int desxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int desxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double desx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int desyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int desyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double desy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int tipoleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int tiporight = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object tipo = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		
-            animaciones.add(new animar(desx, desy,String.valueOf(tipo),graficos.get(graficos.size()-1))); 
+            animaciones.add(new animar(desx, desy,String.valueOf(tipo),graficos.get(graficos.size()-1),codigoGraf-1)); 
+
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -402,7 +404,7 @@ class CUP$Parser$actions {
             {
               Object RESULT =null;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((Symbol)CUP$Parser$stack.peek()), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -410,11 +412,11 @@ class CUP$Parser$actions {
           case 7: // siguiente ::= error siguiente 
             {
               Object RESULT =null;
-		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int eleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int eright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object e = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("siguiente",1, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -422,11 +424,11 @@ class CUP$Parser$actions {
           case 8: // tanimacion ::= LINEA 
             {
               Object RESULT =null;
-		int tipoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int tiporight = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String tipo = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int tipoleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int tiporight = ((Symbol)CUP$Parser$stack.peek()).right;
+		String tipo = (String)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = tipo;
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("tanimacion",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("tanimacion",3, ((Symbol)CUP$Parser$stack.peek()), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -434,11 +436,11 @@ class CUP$Parser$actions {
           case 9: // tanimacion ::= CURVA 
             {
               Object RESULT =null;
-		int tipoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int tiporight = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String tipo = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int tipoleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int tiporight = ((Symbol)CUP$Parser$stack.peek()).right;
+		String tipo = (String)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT = tipo;
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("tanimacion",3, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("tanimacion",3, ((Symbol)CUP$Parser$stack.peek()), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -446,22 +448,22 @@ class CUP$Parser$actions {
           case 10: // graf ::= CIRC PARI expr COMA expr COMA expr COMA COLOR PARD 
             {
               Object RESULT =null;
-		int posxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
-		int posxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
-		Double posx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		int posyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int posyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double posy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int radioleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int radioright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double radio = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 graficar graficoT = new graficar("circulo", posx,posy,c,radio);
-            graficos.add(graficoT); graficoAnt = graficoT;
+		int posxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
+		int posxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
+		Double posx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
+		int posyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int posyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double posy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int radioleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int radioright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double radio = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int cleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int cright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String c = (String)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		 graficar graficoT = new graficar("circulo", posx,posy,c,radio); graficoT.setCodigo(codigoGraf);
+            graficos.add(graficoT); graficoAnt = graficoT; codigoGraf++;
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -469,22 +471,22 @@ class CUP$Parser$actions {
           case 11: // graf ::= CUAD PARI expr COMA expr COMA expr COMA COLOR PARD 
             {
               Object RESULT =null;
-		int posxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
-		int posxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
-		Double posx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		int posyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int posyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double posy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int ladoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int ladoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double lado = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 graficar graficoT = new graficar("cuadrado", posx,posy,c,lado);
-            graficos.add(graficoT); graficoAnt = graficoT;
+		int posxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
+		int posxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
+		Double posx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
+		int posyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int posyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double posy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int ladoleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int ladoright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double lado = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int cleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int cright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String c = (String)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		 graficar graficoT = new graficar("cuadrado", posx,posy,c,lado); graficoT.setCodigo(codigoGraf);
+            graficos.add(graficoT); graficoAnt = graficoT; codigoGraf++;
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -492,25 +494,25 @@ class CUP$Parser$actions {
           case 12: // graf ::= RECT PARI expr COMA expr COMA expr COMA expr COMA COLOR PARD 
             {
               Object RESULT =null;
-		int posxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).left;
-		int posxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).right;
-		Double posx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-9)).value;
-		int posyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
-		int posyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
-		Double posy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		int ladoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int ladoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double lado = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int ancholeft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int anchoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double ancho = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 graficar graficoT = new graficar("rectangulo", posx,posy,c,lado,ancho);
-            graficos.add(graficoT); graficoAnt = graficoT;
+		int posxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).left;
+		int posxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).right;
+		Double posx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-9)).value;
+		int posyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
+		int posyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
+		Double posy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
+		int ladoleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int ladoright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double lado = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int ancholeft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int anchoright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double ancho = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int cleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int cright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String c = (String)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		 graficar graficoT = new graficar("rectangulo", posx,posy,c,lado,ancho); graficoT.setCodigo(codigoGraf);
+            graficos.add(graficoT); graficoAnt = graficoT; codigoGraf++;
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -518,25 +520,25 @@ class CUP$Parser$actions {
           case 13: // graf ::= LINEA PARI expr COMA expr COMA expr COMA expr COMA COLOR PARD 
             {
               Object RESULT =null;
-		int posxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).left;
-		int posxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).right;
-		Double posx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-9)).value;
-		int posyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
-		int posyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
-		Double posy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		int posx2left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int posx2right = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double posx2 = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int posy2left = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int posy2right = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double posy2 = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 graficar graficoT = new graficar("linea", posx,posy,c,posx2,posy2);
-            graficos.add(graficoT); graficoAnt = graficoT;
+		int posxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).left;
+		int posxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).right;
+		Double posx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-9)).value;
+		int posyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
+		int posyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
+		Double posy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
+		int posx2left = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int posx2right = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double posx2 = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int posy2left = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int posy2right = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double posy2 = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int cleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int cright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String c = (String)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		 graficar graficoT = new graficar("linea", posx,posy,c,posx2,posy2); graficoT.setCodigo(codigoGraf);
+            graficos.add(graficoT); graficoAnt = graficoT; codigoGraf++;
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -544,28 +546,28 @@ class CUP$Parser$actions {
           case 14: // graf ::= POLIG PARI expr COMA expr COMA expr COMA expr COMA expr COMA COLOR PARD 
             {
               Object RESULT =null;
-		int posxleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)).left;
-		int posxright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)).right;
-		Double posx = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-11)).value;
-		int posyleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).left;
-		int posyright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).right;
-		Double posy = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-9)).value;
-		int altoleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
-		int altoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
-		Double alto = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
-		int ancholeft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
-		int anchoright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
-		Double ancho = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
-		int cantleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
-		int cantright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
-		Double cant = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
-		int cleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int cright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		String c = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		 graficar graficoT = new graficar("poligono", posx,posy,c,alto,ancho,cant);
-            graficos.add(graficoT); graficoAnt = graficoT;
+		int posxleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)).left;
+		int posxright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-11)).right;
+		Double posx = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-11)).value;
+		int posyleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).left;
+		int posyright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-9)).right;
+		Double posy = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-9)).value;
+		int altoleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).left;
+		int altoright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-7)).right;
+		Double alto = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-7)).value;
+		int ancholeft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).left;
+		int anchoright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-5)).right;
+		Double ancho = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-5)).value;
+		int cantleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).left;
+		int cantright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-3)).right;
+		Double cant = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-3)).value;
+		int cleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int cright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		String c = (String)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		 graficar graficoT = new graficar("poligono", posx,posy,c,alto,ancho,cant); graficoT.setCodigo(codigoGraf);
+            graficos.add(graficoT); graficoAnt = graficoT; codigoGraf++;
         
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-13)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-13)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -573,11 +575,11 @@ class CUP$Parser$actions {
           case 15: // graf ::= error graf 
             {
               Object RESULT =null;
-		int eleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int eright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object e = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int eleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int eright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object e = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		errorsList.add("Error graficando");
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("graf",2, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -585,17 +587,17 @@ class CUP$Parser$actions {
           case 16: // expr ::= expr SMAS expr 
             {
               Double RESULT =null;
-		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Double x = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int yleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int yright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Double y = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int xleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int xright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Double x = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		int sleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int sright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object s = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int yleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int yright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Double y = (Double)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT=x+y; operaciones.add(new operacion("suma",String.valueOf(x) + "+" + String.valueOf(y)));
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -603,17 +605,17 @@ class CUP$Parser$actions {
           case 17: // expr ::= expr SMENOS expr 
             {
               Double RESULT =null;
-		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Double x = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int yleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int yright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Double y = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int xleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int xright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Double x = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		int sleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int sright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object s = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int yleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int yright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Double y = (Double)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT=x-y; operaciones.add(new operacion("resta",String.valueOf(x) + "-" + String.valueOf(y)));
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -621,17 +623,17 @@ class CUP$Parser$actions {
           case 18: // expr ::= expr SMULT expr 
             {
               Double RESULT =null;
-		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Double x = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int yleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int yright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Double y = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int xleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int xright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Double x = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		int sleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int sright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object s = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int yleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int yright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Double y = (Double)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT=x*y; operaciones.add(new operacion("multiplicacion",String.valueOf(x) + "*" + String.valueOf(y)));
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -639,17 +641,17 @@ class CUP$Parser$actions {
           case 19: // expr ::= expr SDIVI expr 
             {
               Double RESULT =null;
-		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
-		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
-		Double x = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
-		int sleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int sright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		int yleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int yright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		Double y = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int xleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).left;
+		int xright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)).right;
+		Double x = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-2)).value;
+		int sleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int sright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Object s = (Object)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int yleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int yright = ((Symbol)CUP$Parser$stack.peek()).right;
+		Double y = (Double)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT=x/y; operaciones.add(new operacion("division",String.valueOf(x) + "/" + String.valueOf(y)));
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -657,11 +659,11 @@ class CUP$Parser$actions {
           case 20: // expr ::= NUMERO 
             {
               Double RESULT =null;
-		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).left;
-		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()).right;
-		String x = (String)((java_cup.runtime.Symbol) CUP$Parser$stack.peek()).value;
+		int xleft = ((Symbol)CUP$Parser$stack.peek()).left;
+		int xright = ((Symbol)CUP$Parser$stack.peek()).right;
+		String x = (String)((Symbol) CUP$Parser$stack.peek()).value;
 		RESULT=new Double(x);
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((Symbol)CUP$Parser$stack.peek()), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -669,11 +671,11 @@ class CUP$Parser$actions {
           case 21: // expr ::= PARI expr PARD 
             {
               Double RESULT =null;
-		int xleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
-		int xright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
-		Double x = (Double)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
+		int xleft = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
+		int xright = ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
+		Double x = (Double)((Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
 		RESULT=x;
-              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
+              CUP$Parser$result = parser.getSymbolFactory().newSymbol("expr",4, ((Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-2)), ((Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
 
@@ -686,9 +688,9 @@ class CUP$Parser$actions {
     } /* end of method */
 
   /** Method splitting the generated action code into several parts. */
-  public final java_cup.runtime.Symbol CUP$Parser$do_action(
+  public final Symbol CUP$Parser$do_action(
     int                        CUP$Parser$act_num,
-    java_cup.runtime.lr_parser CUP$Parser$parser,
+    lr_parser CUP$Parser$parser,
     java.util.Stack            CUP$Parser$stack,
     int                        CUP$Parser$top)
     throws Exception

@@ -11,9 +11,6 @@
             android:id="@+id/nav_gallery"
             android:title="Ocurrencias Operadores" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:title="@string/menu_slideshow" />
-        <item
             android:id="@+id/nav_colores"
             android:title="Colores" />
 

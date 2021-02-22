@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.pruebapractica2.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
+        android:label="Ocurrencias"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
@@ -26,19 +26,19 @@
     <fragment
         android:id="@+id/nav_colores"
         android:name="com.example.pruebapractica2.ui.colores.colores"
-        android:label="@string/menu_slideshow"
+        android:label="Colores"
         tools:layout="@layout/fragment_colores" />
 
     <fragment
         android:id="@+id/nav_objetos"
         android:name="com.example.pruebapractica2.ui.objetosU.objetos"
-        android:label="@string/menu_slideshow"
+        android:label="Objetos"
         tools:layout="@layout/fragment_objetos" />
 
     <fragment
         android:id="@+id/nav_animaciones"
         android:name="com.example.pruebapractica2.ui.animaciones.animaciones"
-        android:label="@string/menu_slideshow"
+        android:label="Animaciones"
         tools:layout="@layout/fragment_animaciones" />
 
 </navigation>

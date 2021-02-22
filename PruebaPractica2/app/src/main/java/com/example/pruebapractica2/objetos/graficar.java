@@ -19,6 +19,7 @@ public class graficar implements Serializable {
     private Double ins3;
     private Double ins4;
     private Double ins5;
+    private int codigo;
 
     public graficar(String tipo, Double posx, Double posy, String color, Double ins3) {
         this.tipo = tipo;
@@ -45,6 +46,14 @@ public class graficar implements Serializable {
         this.ins3 = ins3;
         this.ins4 = ins4;
         this.ins5 = ins5;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     public String getTipo() {

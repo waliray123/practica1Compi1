@@ -20,52 +20,135 @@ import com.example.pruebapractica2.objetos.graficar;
 import java.util.List;
 
 public class LienzoAnim extends View {
-    private int [][] coorAnim;
+    private float [][] coorAnim;
+    private float [][] coorAnimLin;
     private Canvas canvas;
 
     private List<graficar> graficos;
     private List<animar> animaciones;
     private int cont;
+    private int numAnim;
+
+    private float coorXF;
+    private float coorYF;
+    private float coorXI;
+    private float coorYI;
+    float sumX ;
+    float sumY ;
+    float acumX;
+    float acumY;
+
+    private int contVeces;
 
     public LienzoAnim(Context context, List<graficar> graficos, List<animar> animaciones) {
         super(context);
-        coorAnim = new int[animaciones.size()][2];
+        coorAnim = new float[animaciones.size()][2];
+        coorAnimLin = new float[animaciones.size()][2];
         this.graficos = graficos;
         this.animaciones = animaciones;
         this.cont = 0;
+        this.numAnim = 0;
+        llenarInitCoor();
+        llenarInitCoorLin();
+        this.contVeces = 0;
     }
+
+    private void llenarInitCoor(){
+        int cont1 = 0;
+        for (animar anim : animaciones){
+            this.coorAnim[cont1][0] = anim.getGraficoAnim().getPosx().floatValue();
+            this.coorAnim[cont1][1] = anim.getGraficoAnim().getPosy().floatValue();
+            cont1++;
+        }
+    }
+
+    private void llenarInitCoorLin(){
+        int cont1 = 0;
+        for (animar anim : animaciones){
+            if (anim.getGraficoAnim().getTipo().equalsIgnoreCase("linea")){
+                this.coorAnimLin[cont1][0] = anim.getGraficoAnim().getIns3().floatValue();
+                this.coorAnimLin[cont1][1] = anim.getGraficoAnim().getIns4().floatValue();
+            }
+            cont1++;
+        }
+    }
+
 
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         this.canvas = canvas;
 
+
         canvas.drawColor(Color.WHITE);
 
         dibujar();
-        //dibujarAnim();
+        dibujarAnim();
 
-        /*
-        coorAnim[0][0] += 1;
-        coorAnim[0][1] += 1;
-        this.canvas.drawCircle(coorAnim[0][0],coorAnim[0][1],50,pincel1);
 
-        //this.canvas.drawCircle(100,100,50,pincel1);
 
-        coorAnim[1][0] += 1;
-        coorAnim[1][1] += 1;
 
-        Bitmap pol = BitmapFactory.decodeResource(getResources(), R.drawable.ic_pol6);
-        ColorFilter filter = new PorterDuffColorFilter(Color.BLUE, PorterDuff.Mode.SRC_IN);
-        pincel1.setColorFilter(filter);
-        Bitmap polR = Bitmap.createScaledBitmap(pol,100,200,true);
+        animar animU = animaciones.get(numAnim);
+        this.coorXF = animU.getDestinox().floatValue();
+        this.coorYF = animU.getDestinoy().floatValue();
+        this.coorXI = animU.getGraficoAnim().getPosx().floatValue();
+        this.coorYI = animU.getGraficoAnim().getPosy().floatValue();
+        float distX = coorXF-coorXI;
+        float distY = coorYF-coorYI;
+        String tipo = animU.getTipo();
+        if (tipo.equals("linea")){
+            this.sumX = distX/200;
+            this.sumY = distY/200;
+        }else{
+            this.sumX = distX/200;
+            this.sumY = distY/200;
+            if (Math.abs(sumX) >= Math.abs(sumY)){
+                if (contVeces <= 50){
+                    this.sumX = distX/200;
+                    this.sumY = distY/200-1;
+                }else if(contVeces > 50 && contVeces <= 100){
+                    this.sumX = distX/200;
+                    this.sumY = distY/200+1;
+                }else if(contVeces > 100 && contVeces <= 150){
+                    this.sumX = distX/200;
+                    this.sumY = distY/200+1;
+                }else if(contVeces > 150 && contVeces <= 200){
+                    this.sumX = distX/200;
+                    this.sumY = distY/200-1;
+                }
+            }else{
+                if (contVeces <= 50){
+                    this.sumX = distX/200+1;
+                    this.sumY = distY/200;
+                }else if(contVeces > 50 && contVeces <= 100){
+                    this.sumX = distX/200-1;
+                    this.sumY = distY/200;
+                }else if(contVeces > 100 && contVeces <= 150){
+                    this.sumX = distX/200-1;
+                    this.sumY = distY/200;
+                }else if(contVeces > 150 && contVeces <= 200){
+                    this.sumX = distX/200+1;
+                    this.sumY = distY/200;
+                }
+            }
 
-        canvas.drawBitmap(polR,200,100,pincel1);
+        }
 
-         */
 
-        cont++;
+        //coorAnim [i][0] es coordenada en x
+        coorAnim[numAnim][0] += sumX;
+        coorAnimLin[numAnim][0] += sumX;
+        //coorAnim [i][1] es coordenada en y
+        coorAnim[numAnim][1] += sumY;
+        coorAnimLin[numAnim][1] += sumY;
 
-        if (cont<2){
+        if (coorAnim[numAnim][0] == coorXF && coorAnim[numAnim][1] == coorYF ||contVeces>201){
+            numAnim++;
+            cont++;
+            contVeces = 0;
+        }
+        contVeces++;
+
+        if (cont<animaciones.size()){
             invalidate();
         }
 
@@ -93,26 +176,29 @@ public class LienzoAnim extends View {
         //Paint pincel = new Paint();
         //pincel = getPincel("morado");
         //this.canvas.drawCircle(100,100,50,pincel);
+        int cont2 = 0;
         for (animar anim : animaciones){
+
             graficar grafico = anim.getGraficoAnim();
             String tipo = grafico.getTipo();
             if (tipo.equalsIgnoreCase("circulo")){
-                canvas.drawCircle(grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),grafico.getIns3().floatValue(),getPincel(grafico.getColor()));
+                canvas.drawCircle(coorAnim[cont2][0],coorAnim[cont2][1],grafico.getIns3().floatValue(),getPincel(grafico.getColor()));
             }else if(tipo.equalsIgnoreCase("linea")){
                 Paint pincel = new Paint();
                 pincel = getPincel(grafico.getColor());
                 pincel.setStrokeWidth(10);
-                canvas.drawLine(grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),
-                        grafico.getIns3().floatValue(),grafico.getIns4().floatValue(),pincel);
+
+                canvas.drawLine(coorAnim[cont2][0],coorAnim[cont2][1],
+                        coorAnimLin[cont2][0],coorAnimLin[cont2][1],pincel);
             }else if(tipo.equalsIgnoreCase("cuadrado")){
-                canvas.drawRect(grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),
-                        (grafico.getIns3().floatValue()+grafico.getPosx().floatValue()),
-                        grafico.getIns3().floatValue()+grafico.getPosy().floatValue(),
+                canvas.drawRect(coorAnim[cont2][0],coorAnim[cont2][1],
+                        (grafico.getIns3().floatValue()+coorAnim[cont2][0]),
+                        grafico.getIns3().floatValue()+coorAnim[cont2][1],
                         getPincel(grafico.getColor()));
             }else if(tipo.equalsIgnoreCase("rectangulo")){
-                canvas.drawRect(grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),
-                        (grafico.getIns4().floatValue()+grafico.getPosx().floatValue()),
-                        grafico.getIns3().floatValue()+grafico.getPosy().floatValue(),
+                canvas.drawRect(coorAnim[cont2][0],coorAnim[cont2][1],
+                        (grafico.getIns4().floatValue()+coorAnim[cont2][0]),
+                        grafico.getIns3().floatValue()+coorAnim[cont2][1],
                         getPincel(grafico.getColor()));
             }
             else if(tipo.equalsIgnoreCase("poligono")){
@@ -122,8 +208,9 @@ public class LienzoAnim extends View {
                 Bitmap bitmap = getPathPol(grafico.getIns5().intValue());
                 Bitmap polR = Bitmap.createScaledBitmap(bitmap,grafico.getIns4().intValue(),grafico.getIns3().intValue(),true);
 
-                canvas.drawBitmap(polR,grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),pincel);
+                canvas.drawBitmap(polR,coorAnim[cont2][0],coorAnim[cont2][1],pincel);
             }
+            cont2++;
         }
     }
 
@@ -133,7 +220,15 @@ public class LienzoAnim extends View {
         //pincel = getPincel("morado");
         //this.canvas.drawCircle(100,100,50,pincel);
         for (graficar grafico : graficos){
-            if (animaciones.contains(grafico) == false){
+            boolean isAnim = false;
+            for (animar anim : animaciones){
+                int codigoAnim = anim.getCodigoGrafico();
+                if (codigoAnim == grafico.getCodigo()){
+                    isAnim = true;
+                    break;
+                }
+            }
+            if (isAnim == false){
                 String tipo = grafico.getTipo();
                 if (tipo.equalsIgnoreCase("circulo")){
                     canvas.drawCircle(grafico.getPosx().floatValue(),grafico.getPosy().floatValue(),grafico.getIns3().floatValue(),getPincel(grafico.getColor()));

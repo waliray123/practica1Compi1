@@ -16,12 +16,22 @@ public class animar implements Serializable {
     private Double destinoy;
     private String tipo;
     private graficar graficoAnim;
+    private int codigoGrafico;
 
-    public animar(Double destinox, Double destinoy, String tipo,graficar graficoAnim) {
+    public animar(Double destinox, Double destinoy, String tipo,graficar graficoAnim,int codigoGraf) {
         this.destinox = destinox;
         this.destinoy = destinoy;
         this.tipo = tipo;
         this.graficoAnim = graficoAnim;
+        this.codigoGrafico = codigoGraf;
+    }
+
+    public int getCodigoGrafico() {
+        return codigoGrafico;
+    }
+
+    public void setCodigoGrafico(int codigoGrafico) {
+        this.codigoGrafico = codigoGrafico;
     }
 
     public graficar getGraficoAnim() {
